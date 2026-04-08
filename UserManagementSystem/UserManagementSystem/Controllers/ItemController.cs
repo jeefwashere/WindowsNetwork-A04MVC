@@ -10,30 +10,30 @@ namespace UserManagementSystem.Controllers
     public class ItemController : Controller
     {
         //Connection Settings
-        //private readonly UserContext userContext;
-        // Constructor to get database information
-        //public ItemController(UserContext userContext)
-        //{
-        //    this.userContext = userContext;
-        //}
+        private readonly UserContext userContext;
+        //Constructor to get database information
+        public ItemController(UserContext userContext)
+        {
+            this.userContext = userContext;
+        }
 
-        // GET: AddItemController
+        //GET: AddController
 
 
-        //POST
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddItem(UserItem item)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        userContext.UserItems.Add(item);
-        //        await userContext.SaveChangesAsync();
+       //POST
+       [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(UserItem item)
+        {
+            if (ModelState.IsValid)
+            {
+                userContext.UserItems.Add(item);
+                await userContext.SaveChangesAsync();
 
-        //        return RedirectToAction("AddItem", "ViewItem");
-        //    }
-        //    return View(item);
-        //}
+                return RedirectToAction("Add", "ViewItem");
+            }
+            return View(item);
+        }
         private static List<string> Items = new List<string>
         {
             "Apple",
@@ -46,21 +46,21 @@ namespace UserManagementSystem.Controllers
             return View(Items);
         }
         [HttpGet]
-        public IActionResult Add()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Add(string ItemName)
-        {
-            if (!string.IsNullOrWhiteSpace(ItemName))
-            {
-                Items.Add(ItemName);
-            }
+        //public IActionResult Add()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Add(string ItemName)
+        //{
+        //    if (!string.IsNullOrWhiteSpace(ItemName))
+        //    {
+        //        Items.Add(ItemName);
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
 
         [HttpGet]
