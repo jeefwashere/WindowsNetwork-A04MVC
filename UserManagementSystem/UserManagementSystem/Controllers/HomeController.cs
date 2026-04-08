@@ -23,6 +23,28 @@ namespace UserManagementSystem.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
+            if (username == "admin" && password == "1234")
+            {
+                return Content("Login Success");
+            }
+
+            ViewBag.Message = "Invalid username or password";
+            return View();
+        }
+        public IActionResult ViewDatas()
+        {
+            ViewData["Fruits"] = new List<string> { "Apple", "Banana", "Orange" };
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
