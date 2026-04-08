@@ -10,34 +10,92 @@ namespace UserManagementSystem.Controllers
     public class ItemController : Controller
     {
         //Connection Settings
-        private readonly UserContext userContext;
+        //private readonly UserContext userContext;
         // Constructor to get database information
-        public ItemController(UserContext userContext)
-        {
-            this.userContext = userContext;
-        }
+        //public ItemController(UserContext userContext)
+        //{
+        //    this.userContext = userContext;
+        //}
 
         // GET: AddItemController
-        public ActionResult Index()
+
+
+        //POST
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddItem(UserItem item)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        userContext.UserItems.Add(item);
+        //        await userContext.SaveChangesAsync();
+
+        //        return RedirectToAction("AddItem", "ViewItem");
+        //    }
+        //    return View(item);
+        //}
+        private static List<string> Items = new List<string>
+        {
+            "Apple",
+            "Banana",
+            "Orange"
+        };
+
+        public IActionResult Index()
+        {
+            return View(Items);
+        }
+        [HttpGet]
+        public IActionResult Add()
         {
             return View();
         }
-
-        //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddItem(UserItem item)
+        public IActionResult Add(string ItemName)
         {
-            if(ModelState.IsValid)
+            if (!string.IsNullOrWhiteSpace(ItemName))
             {
-                userContext.UserItems.Add(item);
-                await userContext.SaveChangesAsync();
-
-                return RedirectToAction("AddItem", "ViewItem");
+                Items.Add(ItemName);
             }
-            return View(item);
+
+            return RedirectToAction("Index");
         }
 
-        
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(string ItemName)
+        {
+            if (!string.IsNullOrWhiteSpace(ItemName))
+            {
+                Items.Remove(ItemName);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public IActionResult Update()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(string ItemName)
+        {
+            if (!string.IsNullOrWhiteSpace(ItemName))
+            {
+                
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
