@@ -1,83 +1,43 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserManagementSystem.Data;
+using UserManagementSystem.Models;
+
+
 
 namespace UserManagementSystem.Controllers
 {
-    public class AddItemController : Controller
+    public class ItemController : Controller
     {
+        //Connection Settings
+        private readonly UserContext userContext;
+        // Constructor to get database information
+        public ItemController(UserContext userContext)
+        {
+            this.userContext = userContext;
+        }
+
         // GET: AddItemController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: AddItemController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AddItemController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: AddItemController/Create
+        //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> AddItem(UserItem item)
         {
-            try
+            if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                userContext.UserItems.Add(item);
+                await userContext.SaveChangesAsync();
+
+                return RedirectToAction("AddItem", "ViewItem");
             }
-            catch
-            {
-                return View();
-            }
+            return View(item);
         }
 
-        // GET: AddItemController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AddItemController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AddItemController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AddItemController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
