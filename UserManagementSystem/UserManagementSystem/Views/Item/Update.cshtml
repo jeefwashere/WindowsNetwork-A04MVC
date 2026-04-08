@@ -1,15 +1,32 @@
-﻿@{
+﻿@model UserManagementSystem.Models.UserItem
+
+@{
     ViewData["Title"] = "Update Item";
 }
 
 <h2>Update Item</h2>
 
-<form asp-controller="Item" asp-action="Update" method="post">
-    <div style="margin-bottom:12px;">
-        <label for="ItemName">Item Name:</label>
-        <input type="text" id="ItemName" name="ItemName" />
+<form asp-action="Update" method="post">
+    @Html.AntiForgeryToken()
+
+    <!-- Hidden ID -->
+    <input type="hidden" asp-for="UserItemId" />
+
+    <div>
+        <label>Item Name:</label>
+        <input asp-for="ItemName" />
     </div>
 
-    <button type="submit">Update</button>
-    <a asp-controller="Item" asp-action="Index" style="margin-left:10px;">Back</a>
+    <div>
+        <label>Description:</label>
+        <input asp-for="Description" />
+    </div>
+
+    <div>
+        <label>Quantity:</label>
+        <input asp-for="Quantity" min="0" />
+    </div>
+
+    <button type="submit">Save</button>
+    <a asp-action="Index">Back</a>
 </form>

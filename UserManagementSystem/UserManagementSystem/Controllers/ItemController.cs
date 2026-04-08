@@ -21,10 +21,10 @@ namespace UserManagementSystem.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var items = await userContext.UserItem.ToListAsync();
+            List<UserItem> items = await userContext.UserItem.ToListAsync();
             return View(items);
         }
-        
+
         //GET: Add Item page
 
         public IActionResult Add()
@@ -33,13 +33,65 @@ namespace UserManagementSystem.Controllers
         }
 
         //Post Add item logic
-        [HttpPost] 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(UserItem item)
         {
             if (ModelState.IsValid)
             {
-                item.OwnerID = 1; // Test value
+                User user = new User();
+
+                item.Owner = user;
+                item.OwnerID = user.UserId; // Test value
                 userContext.UserItem.Add(item);
+                await userContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return View(item);
+        }
+
+
+
+        //Get Item/Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            UserItem? item = await userContext.UserItem.FindAsync(id);
+
+            if (item == null)
+            {
+                ModelState.AddModelError("", "Item not Found");
+                return View();
+            }
+
+            userContext.UserItem.Remove(item);
+            await userContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            UserItem? item = await userContext.UserItem.FindAsync(id);
+
+            if(item == null)
+            {
+                return NotFound();
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UserItem item)
+        {
+            if(ModelState.IsValid)
+            {
+                userContext.UserItem.Update(item);
                 await userContext.SaveChangesAsync();
 
                 return RedirectToAction("Index");
