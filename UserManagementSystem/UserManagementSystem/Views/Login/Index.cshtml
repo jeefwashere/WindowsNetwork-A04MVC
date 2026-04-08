@@ -1,0 +1,27 @@
+﻿@{
+    //set the tile
+    ViewData["Title"] = "Login Page";
+}
+
+
+
+<form method="post" asp-action="Login">
+    <h2>Login In here!</h2>
+    <div style="width:300px; margin:40px auto;">
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:90px;">Username</label>
+            <input type="text" name="username" />
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:90px;">Password</label>
+            <input type="password" name="password" />
+        </div>
+
+        <div style="padding-left:94px;">
+            <button type="submit">Login</button>
+        </div>
+    </div>
+</form>
+
+<p style="color:red;">@ViewBag.Message</p>

@@ -1,0 +1,36 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Item List";
+}
+
+<div style="display:flex; min-height:400px;">
+    <div style="width:220px; padding:20px; border-right:1px solid #ccc;">
+        <h3>Menu</h3>
+        <a asp-controller="Item" asp-action="Add"
+           style="display:inline-block; padding:10px 16px; background:#007bff; color:white; text-decoration:none; border-radius:4px;">
+            Add Item
+        </a>
+        <br /><br />
+        <a asp-controller="Item" asp-action="Delete"
+           style="display:inline-block; padding:10px 16px; background:#007bff; color:white; text-decoration:none; border-radius:4px;">
+            Delete Item
+        </a>
+        <br /><br />
+        <a asp-controller="Item" asp-action="Update"
+           style="display:inline-block; padding:10px 16px; background:#007bff; color:white; text-decoration:none; border-radius:4px;">
+            Update Item
+        </a>
+    </div>
+
+    <div style="flex:1; padding:20px;">
+        <h2>Item List</h2>
+
+        <ul>
+            @foreach (var Item in Model)
+            {
+                <li>@Item</li>
+            }
+        </ul>
+    </div>
+</div>
