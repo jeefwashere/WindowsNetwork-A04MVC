@@ -26,14 +26,16 @@ namespace UserManagementSystem.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddItem(UserItem item)
+        public async Task<IActionResult> Index(UserItem item)
         {
             if(ModelState.IsValid)
             {
+                //item.OwnerID = 1; // replace with session later
+
                 userContext.UserItems.Add(item);
                 await userContext.SaveChangesAsync();
 
-                return RedirectToAction("AddItem", "ViewItem");
+                return RedirectToAction("Index", "Item");
             }
             return View(item);
         }
