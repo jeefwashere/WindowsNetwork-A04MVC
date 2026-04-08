@@ -59,7 +59,7 @@ namespace UserManagementSystem.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("UserManagementSystem.Models.UserItem", b =>
@@ -88,7 +88,7 @@ namespace UserManagementSystem.Migrations
 
                     b.HasIndex("OwnerID");
 
-                    b.ToTable("UserItems");
+                    b.ToTable("UserItem");
                 });
 
             modelBuilder.Entity("UserManagementSystem.Models.UserItem", b =>

@@ -1,4 +1,4 @@
-﻿@model List<string>
+﻿ @model List<UserManagementSystem.Models.UserItem>
 
 @{
     ViewData["Title"] = "Item List";
@@ -26,11 +26,26 @@
     <div style="flex:1; padding:20px;">
         <h2>Item List</h2>
 
-        <ul>
-            @foreach (var Item in Model)
-            {
-                <li>@Item</li>
-            }
-        </ul>
+     
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>@item.Description</td>
+                        <td>@item.Quantity</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UserManagementSystem.Data;
 using UserManagementSystem.Models;
 
@@ -16,88 +17,35 @@ namespace UserManagementSystem.Controllers
         {
             this.userContext = userContext;
         }
+        //GET: Show all Items
 
-        //GET: AddController
+        public async Task<IActionResult> Index()
+        {
+            var items = await userContext.UserItem.ToListAsync();
+            return View(items);
+        }
+        
+        //GET: Add Item page
 
+        public IActionResult Add()
+        {
+            return View();
+        }
 
-       //POST
-       [HttpPost]
-        [ValidateAntiForgeryToken]
+        //Post Add item logic
+        [HttpPost] 
         public async Task<IActionResult> Add(UserItem item)
         {
             if (ModelState.IsValid)
             {
-                //item.OwnerID = 1; // replace with session later
-
-                userContext.UserItems.Add(item);
+                item.OwnerID = 1; // Test value
+                userContext.UserItem.Add(item);
                 await userContext.SaveChangesAsync();
 
-                return RedirectToAction("Add", "ViewItem");
+                return RedirectToAction("Index");
             }
             return View(item);
         }
-        private static List<string> Items = new List<string>
-        {
-            "Apple",
-            "Banana",
-            "Orange"
-        };
 
-        public IActionResult Index()
-        {
-            return View(Items);
-        }
-        [HttpGet]
-        //public IActionResult Add()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Add(string ItemName)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(ItemName))
-        //    {
-        //        Items.Add(ItemName);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-
-        [HttpGet]
-        public IActionResult Delete()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(string ItemName)
-        {
-            if (!string.IsNullOrWhiteSpace(ItemName))
-            {
-                Items.Remove(ItemName);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpGet]
-        public IActionResult Update()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Update(string ItemName)
-        {
-            if (!string.IsNullOrWhiteSpace(ItemName))
-            {
-                
-            }
-
-            return RedirectToAction("Index");
-        }
     }
 }

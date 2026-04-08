@@ -11,8 +11,8 @@ using UserManagementSystem.Data;
 namespace UserManagementSystem.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20260408174301_DedicatedSQLServerDBSetup")]
-    partial class DedicatedSQLServerDBSetup
+    [Migration("20260408184355_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,7 +62,7 @@ namespace UserManagementSystem.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("UserManagementSystem.Models.UserItem", b =>
@@ -91,7 +91,7 @@ namespace UserManagementSystem.Migrations
 
                     b.HasIndex("OwnerID");
 
-                    b.ToTable("UserItems");
+                    b.ToTable("UserItem");
                 });
 
             modelBuilder.Entity("UserManagementSystem.Models.UserItem", b =>

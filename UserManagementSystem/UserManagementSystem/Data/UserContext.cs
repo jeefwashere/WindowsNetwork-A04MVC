@@ -11,11 +11,12 @@ namespace UserManagementSystem.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserItem> UserItems { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserItem> UserItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<UserItem>()
                 .HasOne(i => i.Owner)
                 .WithMany(u => u.Items)
