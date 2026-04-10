@@ -26,15 +26,7 @@ namespace UserManagementSystem.Controllers
 
         // GET: LoginController
         [AllowAnonymous]
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: /Login/Login  
-        [HttpGet]
-        [AllowAnonymous] // Allow unauthenticated users to access login  
-        public IActionResult Login(string? returnUrl = null)
+        public ActionResult Index(string? returnUrl = null)
         {
             LoginViewModel login = new LoginViewModel();
 
@@ -61,16 +53,16 @@ namespace UserManagementSystem.Controllers
                 {
                     // Password Hasher found here: https://medium.com/@nambi2210/password-hashing-in-asp-net-core-ee377c29fa24
                     // Explored further in documentation: https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.passwordhasher-1?view=aspnetcore-10.0
-                    PasswordHasher<User> hasher = new PasswordHasher<User>(); 
+                    PasswordHasher<User> hasher = new PasswordHasher<User>();
                     PasswordVerificationResult passwordCheck = hasher.VerifyHashedPassword(user, user.HashedPassword, login.Password);
 
                     if (passwordCheck != PasswordVerificationResult.Failed)
                     {
                         List<Claim> claims = new List<Claim>();
-                        claims.Add(new Claim (ClaimTypes.Name, login.Username));
+                        claims.Add(new Claim(ClaimTypes.Name, user.Username));
 
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity(
-                            claims, 
+                            claims,
                             CookieAuthenticationDefaults.AuthenticationScheme);
 
                         AuthenticationProperties authProperties = new AuthenticationProperties();
@@ -86,7 +78,7 @@ namespace UserManagementSystem.Controllers
                         {
                             viewResult = LocalRedirect(login.ReturnUrl);
                         }
-                        else 
+                        else
                         {
                             viewResult = RedirectToAction("Index", "Item");
                         }
@@ -98,11 +90,20 @@ namespace UserManagementSystem.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Username", "User not found");
+                    ModelState.AddModelError("Username", "Invalid User");
                 }
             }
-            
+
             return viewResult;
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Register()
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //    }
+        //}
     }
 }
