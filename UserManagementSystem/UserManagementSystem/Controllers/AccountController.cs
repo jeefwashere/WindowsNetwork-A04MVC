@@ -14,12 +14,12 @@ using UserManagementSystem.Models;
 
 namespace UserManagementSystem.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         // DB Connection
         private readonly UserContext userContext;
 
-        public LoginController(UserContext userContext)
+        public AccountController(UserContext userContext)
         {
             this.userContext = userContext;
         }

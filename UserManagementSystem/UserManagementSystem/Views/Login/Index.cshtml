@@ -7,7 +7,7 @@
 
 
 
-<form method="post" asp-action="Login" asp-controller="Login">
+<form method="post" asp-action="Login" asp-controller="Account">
     @Html.AntiForgeryToken()
     <input type="hidden" asp-for="ReturnUrl"/>
     <h2>Login In here!</h2>
