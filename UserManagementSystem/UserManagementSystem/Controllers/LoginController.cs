@@ -33,7 +33,7 @@ namespace UserManagementSystem.Controllers
             login.ReturnUrl = returnUrl;
 
             // Store the URL the user was trying to access (to redirect after login)  
-            return View("Index", login);
+            return View(login);
         }
 
         [HttpPost]
@@ -44,6 +44,8 @@ namespace UserManagementSystem.Controllers
         {
             // Forms Authentication found here: https://www.dotnettutorial.co.in/2025/07/authentication-in-aspnet-mvc-with-example.html
             IActionResult viewResult = View("Index", login);
+
+            login.ReturnUrl ??= Url.Content("~/");
 
             if (ModelState.IsValid)
             {
@@ -97,13 +99,13 @@ namespace UserManagementSystem.Controllers
             return viewResult;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Register()
-        //{
-        //    if (ModelState.IsValid)
-        //    {
+        [HttpPost]
+        public async Task<IActionResult> Register()
+        {
+            if (ModelState.IsValid)
+            {
 
-        //    }
-        //}
+            }
+        }
     }
 }
