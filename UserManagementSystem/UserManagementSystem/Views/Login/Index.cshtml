@@ -1,11 +1,15 @@
-﻿@{
+﻿@model UserManagementSystem.Models.LoginViewModel
+
+@{
     //set the tile
     ViewData["Title"] = "Login Page";
 }
 
 
 
-<form method="post" asp-action="Login">
+<form method="post" asp-action="Login" asp-controller="Login">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ReturnUrl"/>
     <h2>Login In here!</h2>
     <div style="width:300px; margin:40px auto;">
         <div style="margin-bottom:15px;">
