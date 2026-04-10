@@ -40,12 +40,14 @@ namespace UserManagementSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        // GET: LoginController/Login/5
+        // POST: LoginController/Login/5
         public async Task<IActionResult> Login(LoginViewModel login, string submitButton)
         {
             // Forms Authentication found here: https://www.dotnettutorial.co.in/2025/07/authentication-in-aspnet-mvc-with-example.html
             IActionResult viewResult = View("Index", login);
 
+
+            // Login structure based on: https://www.w3tutorials.net/blog/asp-net-core-simplest-possible-forms-authentication/#project-setup
             login.ReturnUrl ??= Url.Content("~/");
 
             if (submitButton == "Register")
@@ -69,6 +71,7 @@ namespace UserManagementSystem.Controllers
                         {
                             List<Claim> claims = new List<Claim>();
                             claims.Add(new Claim(ClaimTypes.Name, user.Username));
+                            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
 
                             ClaimsIdentity claimsIdentity = new ClaimsIdentity(
                                 claims,

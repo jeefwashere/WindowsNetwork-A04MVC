@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserManagementSystem.Data;
 using UserManagementSystem.Models;
+using System.Security.Claims;
+using System.Runtime.CompilerServices;
 
 
 
@@ -19,17 +21,32 @@ namespace UserManagementSystem.Controllers
             this.userContext = userContext;
         }
         //GET: Show all Items
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            List<UserItem> items = await userContext.UserItem.ToListAsync();
-            return View(items);
+            IActionResult viewResult = View();
+
+            string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!int.TryParse(userIdClaim, out int userId))
+            {
+                viewResult = Unauthorized();
+            }
+            else
+            {
+                List<UserItem> items = await userContext.UserItem
+                    .Where(item => item.OwnerID == userId)
+                    .Include(item => item.Owner)
+                    .ToListAsync();
+
+                viewResult = View(items);
+            }
+
+            return viewResult;
         }
 
         //GET: Add Item page
 
-        [ValidateAntiForgeryToken]
         [Authorize]
         public IActionResult Add()
         {
@@ -42,19 +59,37 @@ namespace UserManagementSystem.Controllers
         [Authorize]
         public async Task<IActionResult> Add(UserItem item)
         {
+            IActionResult viewResult = View(item);
+
             if (ModelState.IsValid)
             {
-                // Test User
-                User user = new User();
+                string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                item.Owner = user;
-                item.OwnerID = user.UserId; // Test value
-                userContext.UserItem.Add(item);
-                await userContext.SaveChangesAsync();
+                if (!int.TryParse(userIdClaim, out int userId))
+                {
+                    viewResult = Unauthorized();
+                }
+                else
+                {
 
-                return RedirectToAction("Index");
+                    User? currentUser = await userContext.User.FindAsync(userId);
+
+                    if (currentUser == null)
+                    {
+                        viewResult = Unauthorized();
+                    }
+                    else
+                    {
+                        item.Owner = currentUser;
+                        item.OwnerID = currentUser.UserId; // Test value
+                        userContext.UserItem.Add(item);
+                        await userContext.SaveChangesAsync();
+
+                        viewResult = RedirectToAction("Index");
+                    }
+                }
             }
-            return View(item);
+            return viewResult;
         }
 
 
@@ -81,7 +116,6 @@ namespace UserManagementSystem.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> Update(int id)
         {
