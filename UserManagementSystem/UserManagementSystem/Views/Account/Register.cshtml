@@ -9,10 +9,13 @@
 
 <form method="post" asp-action="Register" asp-controller="Account">
     @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="ReturnUrl"/>
+    <input type="hidden"/>
     <h2>Register Account</h2>
 
+    
     <div style="width:300px; margin:40px auto;">
+        <h3>Account</h3>
+        <hr />
         <div style="margin-bottom:15px;">
             <label style="display:inline-block; width:90px;">Username</label>
             <input type="text" name="username" />
@@ -25,32 +28,40 @@
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
+        <h3>Address</h3>
+        <hr />
         <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Username</label>
+            <label style="display:inline-block; width:90px;">Street Name</label>
+            <input type="text" name="streetname" />
+            <span asp-validation-for="StreetName" class="text-danger"></span>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:90px;">City</label>
             <input type="text" name="username" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Username</label>
+            <label style="display:inline-block; width:90px;">Province</label>
             <input type="text" name="username" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Username</label>
+            <label style="display:inline-block; width:90px;">Country</label>
             <input type="text" name="username" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Username</label>
+            <label style="display:inline-block; width:90px;">Postal Code</label>
             <input type="text" name="username" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div style="padding-left:94px;">
-            <button type="submit">Login</button>
+            <button type="submit">Register</button>
         </div>
     </div>
 </form>
