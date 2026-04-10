@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserManagementSystem.Data;
@@ -18,7 +19,8 @@ namespace UserManagementSystem.Controllers
             this.userContext = userContext;
         }
         //GET: Show all Items
-
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             List<UserItem> items = await userContext.UserItem.ToListAsync();
@@ -27,6 +29,8 @@ namespace UserManagementSystem.Controllers
 
         //GET: Add Item page
 
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Add()
         {
             return View();
@@ -35,6 +39,7 @@ namespace UserManagementSystem.Controllers
         //Post Add item logic
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Add(UserItem item)
         {
             if (ModelState.IsValid)
@@ -57,6 +62,7 @@ namespace UserManagementSystem.Controllers
         //Get Item/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -75,6 +81,8 @@ namespace UserManagementSystem.Controllers
         }
 
         [HttpGet]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Update(int id)
         {
             UserItem? item = await userContext.UserItem.FindAsync(id);
@@ -88,6 +96,7 @@ namespace UserManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Update(UserItem item)
         {
             if(ModelState.IsValid)

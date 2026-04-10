@@ -16,19 +16,29 @@
         <div style="margin-bottom:15px;">
             <label style="display:inline-block; width:90px;">Username</label>
             <input type="text" name="username" />
-            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div style="margin-bottom:15px;">
             <label style="display:inline-block; width:90px;">Password</label>
             <input type="password" name="password" />
-            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <div style="padding-left:94px;">
             <button type="submit" name="submitButton" value="Login">Login</button>
             <button type="submit" name="submitButton" value="Register">Register</button>
         </div>
+
+        <!-- Taken from: https://www.w3tutorials.net/blog/asp-net-core-simplest-possible-forms-authentication/#project-setup -->
+        <br />
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
     </div>
 </form>
 

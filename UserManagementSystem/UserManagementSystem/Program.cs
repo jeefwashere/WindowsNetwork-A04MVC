@@ -1,5 +1,6 @@
 using UserManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UserContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("UserContext")));
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Index"; // Redirect to login index page if unauthorized
+        // options.LogoutPath = "/Account/Logout";
+        // options.AccessDeniedPath = "/";
+        options.Cookie.Name = "ItemManagerCookie";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+    });
 
 var app = builder.Build();
 
@@ -24,7 +37,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication(); // Checks for authentication cookies  
+app.UseAuthorization(); // Enforces [Authorize] attributes  
 
 app.MapControllerRoute(
     name: "default",

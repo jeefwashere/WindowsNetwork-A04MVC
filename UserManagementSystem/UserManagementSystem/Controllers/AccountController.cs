@@ -94,12 +94,12 @@ namespace UserManagementSystem.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError("Password", "Invalid Password");
+                            ModelState.AddModelError("", "Invalid Password");
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("Username", "Invalid User");
+                        ModelState.AddModelError("", "Invalid User");
                     }
                 }
             }
@@ -127,11 +127,11 @@ namespace UserManagementSystem.Controllers
 
                 if (userCheck)
                 {
-                    ModelState.AddModelError("Username", "Username already exists");
+                    ModelState.AddModelError("", "Username already exists");
                 }
                 else if (!Regex.IsMatch(register.PostalCode, "\\A[ABCEGHJKLMNPRSTVXY]\\d[A-Z] ?\\d[A-Z]\\d\\z"))
                 {
-                    ModelState.AddModelError("PostalCode", "Invalid postal code");
+                    ModelState.AddModelError("", "Invalid postal code");
                 }
                 else
                 {
@@ -157,12 +157,20 @@ namespace UserManagementSystem.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Password", "Invalid password");
+                        ModelState.AddModelError("", "Invalid password");
                     }
                 }
             }
 
             return viewResult;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
