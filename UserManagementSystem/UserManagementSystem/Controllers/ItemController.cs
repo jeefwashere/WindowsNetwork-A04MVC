@@ -118,19 +118,22 @@ namespace UserManagementSystem.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
+            IActionResult viewResult = View();
 
             UserItem? item = await userContext.UserItem.FindAsync(id);
 
             if (item == null)
             {
                 ModelState.AddModelError("", "Item not Found");
-                return View();
+                viewResult = View();
             }
 
             userContext.UserItem.Remove(item);
             await userContext.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            viewResult = RedirectToAction("Index");
+
+            return viewResult;
         }
 
         [HttpGet]
