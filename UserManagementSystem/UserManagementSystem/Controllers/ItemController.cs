@@ -94,7 +94,8 @@ namespace UserManagementSystem.Controllers
                         else
                         {
                             item.ItemName = add.ItemName;
-                            item.Description = add.Description;
+                            item.Description = string.IsNullOrEmpty(add.Description) ? string.Empty : add.Description;
+                            item.Quantity = add.Quantity;
                             item.Owner = currentUser;
                             item.OwnerID = currentUser.UserId; // Test value
                             userContext.UserItem.Add(item);
@@ -206,7 +207,7 @@ namespace UserManagementSystem.Controllers
                                 else
                                 {
                                     userItem.ItemName = update.ItemName;
-                                    userItem.Description = update.Description;
+                                    userItem.Description = string.IsNullOrEmpty(update.Description) ? string.Empty : update.Description;
                                     userItem.Quantity = update.Quantity;
 
                                     await userContext.SaveChangesAsync();
