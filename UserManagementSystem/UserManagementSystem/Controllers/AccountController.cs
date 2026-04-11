@@ -70,7 +70,7 @@ namespace UserManagementSystem.Controllers
                         if (passwordCheck != PasswordVerificationResult.Failed)
                         {
                             List<Claim> claims = new List<Claim>();
-                            claims.Add(new Claim(ClaimTypes.Name, user.Username));
+                            claims.Add(new Claim(ClaimTypes.Name, user.Username.ToString()));
                             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
 
                             ClaimsIdentity claimsIdentity = new ClaimsIdentity(

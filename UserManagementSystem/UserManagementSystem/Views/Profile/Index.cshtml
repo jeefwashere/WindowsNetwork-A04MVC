@@ -1,0 +1,42 @@
+﻿@model UserManagementSystem.Models.ProfileViewModel
+
+@{
+    //set the tile
+    ViewData["Title"] = "Profile Page";
+}
+
+    <h2>Profile Information</h2>
+
+    <div style="width:300px; margin:40px auto;">
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:120px;">Username</label>
+            <span>@Model.Username</span>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:120px;">Street Address</label>
+            <span>@Model.StreetAddress</span>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:120px;">City</label>
+            <span>@Model.City</span>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:120px;">Province</label>
+            <span>@Model.Province</span>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:120px;">Country</label>
+            <span>@Model.Country</span>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <label style="display:inline-block; width:120px;">Postal Code</label>
+            <span>@Model.PostalCode</span>
+        </div>
+    </div>
+
+<p style="color:red;">@ViewBag.Message</p>

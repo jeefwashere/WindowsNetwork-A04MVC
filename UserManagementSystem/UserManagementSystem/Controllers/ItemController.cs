@@ -6,6 +6,8 @@ using UserManagementSystem.Data;
 using UserManagementSystem.Models;
 using System.Security.Claims;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 
 
@@ -67,7 +69,7 @@ namespace UserManagementSystem.Controllers
 
                 if (!int.TryParse(userIdClaim, out int userId))
                 {
-                    viewResult = Unauthorized();
+                    viewResult = RedirectToAction("Logout", "Account");
                 }
                 else
                 {
@@ -76,7 +78,7 @@ namespace UserManagementSystem.Controllers
 
                     if (currentUser == null)
                     {
-                        viewResult = Unauthorized();
+                        viewResult = RedirectToAction("Logout", "Account");
                     }
                     else
                     {
