@@ -1,4 +1,5 @@
-﻿@model UserManagementSystem.Models.RegisterViewModel
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding @*For strongly typed error variable*@
+@model UserManagementSystem.Models.RegisterViewModel
 
 @{
     //set the tile
@@ -62,7 +63,7 @@
         @if (!ViewData.ModelState.IsValid)
         {
             <div class="alert alert-danger">
-                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                @foreach (ModelError error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                 {
                     <p>@error.ErrorMessage</p>
                 }
