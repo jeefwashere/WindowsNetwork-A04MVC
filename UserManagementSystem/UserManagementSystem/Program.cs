@@ -14,8 +14,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/Account/Index"; // Redirect to login index page if unauthorized
-        // options.LogoutPath = "/Account/Logout";
-        // options.AccessDeniedPath = "/";
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/Index";
         options.Cookie.Name = "ItemManagerCookie";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         options.SlidingExpiration = true;
