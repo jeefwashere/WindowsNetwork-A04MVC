@@ -26,20 +26,22 @@ namespace UserManagementSystem.Controllers
         }
 
         // GET: AccountController
+        //this means no authentication can access
         [AllowAnonymous]
         public ActionResult Index(string? returnUrl = null)
-        {
+        {   //create a new view obejct for login
             LoginViewModel login = new LoginViewModel();
-
+            //update info
             login.ReturnUrl = returnUrl;
 
             // Store the URL the user was trying to access (to redirect after login)  
+            //pass to view
             return View(login);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]//detect bad request
         // POST: LoginController/Login/5
         public async Task<IActionResult> Login(LoginViewModel login, string submitButton)
         {

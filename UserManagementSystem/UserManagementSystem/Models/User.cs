@@ -4,12 +4,14 @@ namespace UserManagementSystem.Models
 {
     public class User
     {
+        //required means have to fill
         [Required]
         public int UserId { get; set; }
         [Required]
         public string Username { get; set; } = string.Empty;
         [Required]
         [DataType(DataType.Password)]
+        //this will use on fronter to show
         public string HashedPassword { get; set; } = string.Empty;
         [Required]
         public string? StreetAddress {  get; set; } = string.Empty;

@@ -11,16 +11,18 @@ namespace UserManagementSystem.Data
         {
         }
 
+        //have a user table in the data base
         public DbSet<User> User { get; set; }
+        // have a user item table for data base
         public DbSet<UserItem> UserItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            //set up useritem entity
             modelBuilder.Entity<UserItem>()
-                .HasOne(i => i.Owner)
-                .WithMany(u => u.Items)
-                .HasForeignKey(i => i.OwnerID);
+                .HasOne(i => i.Owner)//one useritem have one owener
+                .WithMany(u => u.Items)//one user have many useritems
+                .HasForeignKey(i => i.OwnerID);//the foreign key in useritem is ownerid
         }
     }
 }
