@@ -30,8 +30,15 @@
         <input type="number" id="Quantity" name="Quantity"/>
     </div>
 
-    <button type="submit">Save</button>
-    <a asp-controller="Item" asp-action="Index" style="margin-left:10px;">Back</a>
+    <button type="submit"
+            style="width:110px; padding:8px; border:1px solid #007bff; background:#007bff; color:white; cursor:pointer; text-align:center;">
+        Add Item
+    </button>
+
+    <a asp-controller="Item" asp-action="Index"
+       style="width:110px; padding:8px; border:1px solid #007bff; background:#007bff; color:white; text-decoration:none; display:inline-block; text-align:center; margin-left:10px;">
+        Back
+    </a>
     <br />
 
     @if (!ViewData.ModelState.IsValid)
