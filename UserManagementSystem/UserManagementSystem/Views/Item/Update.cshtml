@@ -1,8 +1,7 @@
 ﻿<!--
    FILE : Item/Update.cshtml
    PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
-   DESCRIPTION :this is for the Item/update
-
+   DESCRIPTION : this is for the Item/update
 -->
 @using Microsoft.AspNetCore.Mvc.ModelBinding @*For strongly typed error variable*@
 @model UserManagementSystem.Models.UpdateViewModel
@@ -11,49 +10,119 @@
     ViewData["Title"] = "Update Item";
 }
 
-<h2>Update Item</h2>
-<!--post back-->
-<form asp-action="Update" method="post">
-    @Html.AntiForgeryToken()
-
-    <!-- Hidden ID -->
-    <input type="hidden" asp-for="ItemID" />
-
-    <div style="margin-bottom:12px;">
-        <label for="ItemName">Item Name:</label>
-        <!-- To prefill fields -->
-        <input type="text" asp-for="ItemName" />
-    </div>
-
-    <div style="margin-bottom:12px;">
-        <label for="Description">Description:</label>
-        <input type="text" asp-for="Description" />
-    </div>
-
-    <div style="margin-bottom:12px;">
-        <label for="Quantity">Quantity:</label>
-        <input type="number" asp-for="Quantity" />
-    </div>
-
-    <button type="submit"
-            style="width:120px; padding:8px; border:1px solid #007bff; background:#007bff; color:white; cursor:pointer; text-align:center; border-radius:4px;">
-        Update Item
-    </button>
-
-    <a asp-action="Index"
-       style="width:120px; padding:8px; border:1px solid #007bff; background:#007bff; color:white; text-decoration:none; display:inline-block; text-align:center; margin-left:10px; border-radius:4px;">
-        Back
-    </a>
-
-    <br />
-
-    @if (!ViewData.ModelState.IsValid)
-    {
-        <div class="alert alert-danger">
-            @foreach (ModelError error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-            {
-                <p>@error.ErrorMessage</p>
-            }
-        </div>
+<style>
+    .update-card {
+        max-width: 420px;
+        margin: 80px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        font-family: Arial, sans-serif;
     }
-</form>
+
+    .update-title {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    .update-container {
+        width: 300px;
+        margin: 40px auto;
+    }
+
+    .update-row {
+        margin-bottom: 15px;
+    }
+
+    .update-label {
+        display: inline-block;
+        width: 120px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .update-input {
+        width: 160px;
+        padding: 6px 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #555;
+    }
+
+    .update-actions {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .update-button,
+    .back-button {
+        width: 120px;
+        padding: 8px;
+        border: 1px solid #007bff;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+    .back-button {
+        margin-left: 10px;
+    }
+
+    .update-error {
+        color: red;
+        text-align: center;
+        margin-top: 12px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="update-card">
+    <h2 class="update-title">Update Item</h2>
+
+    <form asp-action="Update" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="ItemID" />
+
+        <div class="update-container">
+            <div class="update-row">
+                <label asp-for="ItemName" class="update-label">Item Name</label>
+                <input type="text" asp-for="ItemName" class="update-input" />
+            </div>
+
+            <div class="update-row">
+                <label asp-for="Description" class="update-label">Description</label>
+                <input type="text" asp-for="Description" class="update-input" />
+            </div>
+
+            <div class="update-row">
+                <label asp-for="Quantity" class="update-label">Quantity</label>
+                <input type="number" asp-for="Quantity" class="update-input" />
+            </div>
+        </div>
+
+        <div class="update-actions">
+            <button type="submit" class="update-button">Update Item</button>
+
+            <a asp-action="Index" class="back-button">
+                Back
+            </a>
+        </div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="update-error">
+                @foreach (ModelError error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+    </form>
+</div>

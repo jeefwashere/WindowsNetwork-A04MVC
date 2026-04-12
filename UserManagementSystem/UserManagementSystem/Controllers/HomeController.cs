@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using UserManagementSystem.Models;
@@ -32,6 +33,7 @@ namespace UserManagementSystem.Controllers
         /// when user get into privacy page
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

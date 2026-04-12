@@ -1,18 +1,44 @@
-﻿<!--
-   FILE : Share/_layout.cshtml
-   PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
-   DESCRIPTION :this is for the defalut layout basic is home page html
-
--->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+       FILE : Share/_layout.cshtml
+       PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+       DESCRIPTION :this is for the defalut layout basic is home page html
+
+    -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Item Management System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/UserManagementSystem.styles.css" asp-append-version="true" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .page-content {
+            flex: 1;
+        }
+
+        .footer {
+            padding: 14px 0;
+            font-size: 1rem;
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -62,17 +88,19 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container page-content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container footer-content">
             &copy; 2026 - ItemManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

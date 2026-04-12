@@ -44,7 +44,7 @@ namespace UserManagementSystem.Controllers
             string? userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //get id
             if (!int.TryParse(userIdClaim, out int userId))
-            {//no corrrst login out 
+            {//no cookie login out 
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 viewResult = RedirectToAction("Login", "Account"); // Can't use the logout action directly because it's a post action
             }
