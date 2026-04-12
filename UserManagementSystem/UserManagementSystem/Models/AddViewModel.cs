@@ -1,5 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+/*
+   * FILE : AddViewModel.cs
+   * PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   * DESCRIPTION :set up for add item page, the user can add item to the inventory
+   * 
+   */
 namespace UserManagementSystem.Models
 {
     public class AddViewModel

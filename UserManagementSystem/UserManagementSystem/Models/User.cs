@@ -1,5 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+/*
+   * FILE : UserModel.cs
+   * PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   * DESCRIPTION :set up for User<pde;
+   * 
+   */
 namespace UserManagementSystem.Models
 {
     public class User

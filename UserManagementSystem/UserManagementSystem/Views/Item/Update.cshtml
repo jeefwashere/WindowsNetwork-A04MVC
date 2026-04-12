@@ -1,4 +1,10 @@
-﻿@using Microsoft.AspNetCore.Mvc.ModelBinding @*For strongly typed error variable*@
+﻿<!--
+   FILE : Item/Update.cshtml
+   PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   DESCRIPTION :this is for the Item/update
+
+-->
+@using Microsoft.AspNetCore.Mvc.ModelBinding @*For strongly typed error variable*@
 @model UserManagementSystem.Models.UpdateViewModel
 
 @{
@@ -6,7 +12,7 @@
 }
 
 <h2>Update Item</h2>
-
+<!--post back-->
 <form asp-action="Update" method="post">
     @Html.AntiForgeryToken()
 

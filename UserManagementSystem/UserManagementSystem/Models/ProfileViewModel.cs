@@ -1,5 +1,12 @@
-﻿namespace UserManagementSystem.Models
+﻿/*
+   * FILE : ProfileModel.cs
+   * PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   * DESCRIPTION :set up for Profileview model
+   * 
+   */
+namespace UserManagementSystem.Models
 {
+
     public class ProfileViewModel
     {
         public string Username { get; set; }

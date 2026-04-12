@@ -12,19 +12,31 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UserManagementSystem.Data;
 using UserManagementSystem.Models;
-
+/*
+   * FILE : AccountController.cs
+   * PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   * DESCRIPTION :this is man place for account url controllers
+   * 
+   */
 namespace UserManagementSystem.Controllers
 {
     public class AccountController : Controller
     {
         // DB Connection
         private readonly UserContext userContext;
-
+        /// <summary>
+        /// set up the connection to database
+        /// </summary>
+        /// <param name="userContext"></param>
         public AccountController(UserContext userContext)
         {
             this.userContext = userContext;
         }
-
+        /// <summary>
+        /// this is for show the login page and pass the returnurl to view for later use
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         // GET: AccountController
         //this means no authentication can access
         [AllowAnonymous]
@@ -38,7 +50,12 @@ namespace UserManagementSystem.Controllers
             //pass to view
             return View(login);
         }
-
+        /// <summary>
+        /// this is when login send request
+        /// </summary>
+        /// <param name="login">login model instance</param>
+        /// <param name="submitButton">submit option to login in or register</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]//detect bad request
@@ -115,6 +132,10 @@ namespace UserManagementSystem.Controllers
             return viewResult;
         }
         //show the register page
+        /// <summary>
+        /// normal register
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
@@ -122,6 +143,11 @@ namespace UserManagementSystem.Controllers
             return View(new RegisterViewModel());
         }
         // if post have someone want register
+        /// <summary>
+        /// this is real infomation for register 
+        /// </summary>
+        /// <param name="register">register info</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

@@ -1,5 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+/*
+   * FILE : RegisterView.cs
+   * PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   * DESCRIPTION :set up for RegisterViewModel 
+   * 
+   */
 namespace UserManagementSystem.Models
 {
     public class RegisterViewModel

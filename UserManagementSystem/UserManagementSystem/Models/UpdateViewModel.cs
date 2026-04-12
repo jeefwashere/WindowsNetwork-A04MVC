@@ -1,5 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+/*
+   * FILE : UpdateModel.cs
+   * PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   * DESCRIPTION :set up for updateModel
+   * 
+   */
 namespace UserManagementSystem.Models
 {
     public class UpdateViewModel

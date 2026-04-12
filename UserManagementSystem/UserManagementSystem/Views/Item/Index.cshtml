@@ -1,4 +1,10 @@
-﻿ @model List<UserManagementSystem.Models.UserItem>
+﻿<!--
+   FILE : Item/Index.cshtml
+   PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   DESCRIPTION :this is for the /Item deflut show info
+
+-->
+ @model List<UserManagementSystem.Models.UserItem>
 
 @{
     ViewData["Title"] = "Item List";
@@ -22,7 +28,7 @@
             </thead>
             <tbody>
                 @foreach (var item in Model)
-                {
+                {<!--for loop to show the idem-->
                     <tr>
                         
                         <td>@item.ItemName</td>

@@ -1,61 +1,156 @@
 ﻿@using Microsoft.AspNetCore.Mvc.ModelBinding @*For strongly typed error variable*@
 @model UserManagementSystem.Models.RegisterViewModel
+<!--
+   FILE : Account/Register.cshtml
+   PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   DESCRIPTION :this is for the /account/Register view
 
+-->
 @{
     //set the tile
     ViewData["Title"] = "Registration Page";
 }
 
+<style>
+    .register-form {
+        max-width: 460px;
+        margin: 80px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        font-family: Arial, sans-serif;
+    }
 
+    .register-title {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
 
-<form method="post" asp-action="Register" asp-controller="Account">
+    .form-container {
+        width: 320px;
+        margin: 40px auto;
+    }
+
+    .section-title {
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .form-row {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        display: inline-block;
+        width: 90px;
+        margin-bottom: 6px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
+        }
+
+    .button-row {
+        padding-left: 94px;
+        margin-top: 10px;
+    }
+
+    .form-button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 8px;
+        background-color: #4a90e2;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+        .form-button:hover {
+            background-color: #357bd8;
+        }
+
+    .alert-danger {
+        background-color: #fdeaea;
+        border: 1px solid #f5c2c7;
+        color: #b02a37;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 12px;
+    }
+
+        .alert-danger p {
+            margin: 4px 0;
+        }
+
+    .message-text {
+        color: red;
+        text-align: center;
+        margin-top: 12px;
+        font-weight: bold;
+    }
+</style>
+
+<form method="post" asp-action="Register" asp-controller="Account" class="register-form">
     @Html.AntiForgeryToken()
-    <input type="hidden"/>
-    <h2>Register Account</h2>
+    <input type="hidden" />
+    <h2 class="register-title">Register Account</h2>
 
-    
-    <div style="width:300px; margin:40px auto;">
-        <h3>Account</h3>
+
+    <div class="form-container">
+        <h3 class="section-title">Account</h3>
         <hr />
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Username</label>
-            <input type="text" name="username" />
+        <div class="form-row">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-input" />
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Password</label>
-            <input type="password" name="password" />
+        <div class="form-row">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-input" />
         </div>
 
-        <h3>Address</h3>
+        <h3 class="section-title">Address</h3>
         <hr />
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Street Name</label>
-            <input type="text" name="streetname" />
+        <div class="form-row">
+            <label class="form-label">Street Name</label>
+            <input type="text" name="streetname" class="form-input" />
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">City</label>
-            <input type="text" name="city" />
+        <div class="form-row">
+            <label class="form-label">City</label>
+            <input type="text" name="city" class="form-input" />
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Province</label>
-            <input type="text" name="province" />
+        <div class="form-row">
+            <label class="form-label">Province</label>
+            <input type="text" name="province" class="form-input" />
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Country</label>
-            <input type="text" name="country" />
+        <div class="form-row">
+            <label class="form-label">Country</label>
+            <input type="text" name="country" class="form-input" />
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:90px;">Postal Code</label>
-            <input type="text" name="PostalCode" />
+        <div class="form-row">
+            <label class="form-label">Postal Code</label>
+            <input type="text" name="PostalCode" class="form-input" />
         </div>
 
-        <div style="padding-left:94px;">
-            <button type="submit">Register</button>
+        <div class="button-row">
+            <button type="submit" class="form-button">Register</button>
         </div>
 
         <!-- Taken from: https://www.w3tutorials.net/blog/asp-net-core-simplest-possible-forms-authentication/#project-setup -->
@@ -72,4 +167,4 @@
     </div>
 </form>
 
-<p style="color:red;">@ViewBag.Message</p>
+<p class="message-text">@ViewBag.Message</p>

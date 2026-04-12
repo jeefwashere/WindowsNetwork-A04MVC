@@ -1,4 +1,10 @@
 ﻿namespace UserManagementSystem.Models
+/*
+* FILE : UserItem.cs
+* PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+* DESCRIPTION :set up for UserItemModel
+* 
+*/
 {
     public class UserItem
     {

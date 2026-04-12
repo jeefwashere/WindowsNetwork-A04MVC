@@ -1,9 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Delete Item";
 }
+<!--
+   FILE : Item/Delete.cshtml
+   PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   DESCRIPTION :this is for the /Item/Delete
 
+-->
 <h2>Delete Item</h2>
-
+<!--this will send request-->
 <form asp-controller="Item" asp-action="Delete" method="post" >
     @Html.AntiForgeryToken()
     <div>

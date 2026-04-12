@@ -1,42 +1,95 @@
-﻿@model UserManagementSystem.Models.ProfileViewModel
+﻿<!--
+   FILE : Profile/Index.cshtml
+   PROGRAMMER : Name(s): Josiah Williams,Jeff, Gao Ricardo
+   DESCRIPTION :this is for the /Profile View
+
+-->
+@model UserManagementSystem.Models.ProfileViewModel
 
 @{
     //set the tile
     ViewData["Title"] = "Profile Page";
 }
 
-    <h2>Profile Information</h2>
+<style>
+    .profile-card {
+        max-width: 420px;
+        margin: 80px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        font-family: Arial, sans-serif;
+    }
 
-    <div style="width:300px; margin:40px auto;">
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:120px;">Username</label>
-            <span>@Model.Username</span>
+    .profile-title {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    .profile-container {
+        width: 300px;
+        margin: 40px auto;
+    }
+
+    .profile-row {
+        margin-bottom: 15px;
+    }
+
+    .profile-label {
+        display: inline-block;
+        width: 120px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .profile-value {
+        color: #555;
+    }
+
+    .message-text {
+        color: red;
+        text-align: center;
+        margin-top: 12px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="profile-card">
+    <h2 class="profile-title">Profile Information</h2>
+
+    <div class="profile-container">
+        <div class="profile-row">
+            <label class="profile-label">Username</label>
+            <span class="profile-value">@Model.Username</span>
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:120px;">Street Address</label>
-            <span>@Model.StreetAddress</span>
+        <div class="profile-row">
+            <label class="profile-label">Street Address</label>
+            <span class="profile-value">@Model.StreetAddress</span>
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:120px;">City</label>
-            <span>@Model.City</span>
+        <div class="profile-row">
+            <label class="profile-label">City</label>
+            <span class="profile-value">@Model.City</span>
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:120px;">Province</label>
-            <span>@Model.Province</span>
+        <div class="profile-row">
+            <label class="profile-label">Province</label>
+            <span class="profile-value">@Model.Province</span>
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:120px;">Country</label>
-            <span>@Model.Country</span>
+        <div class="profile-row">
+            <label class="profile-label">Country</label>
+            <span class="profile-value">@Model.Country</span>
         </div>
 
-        <div style="margin-bottom:15px;">
-            <label style="display:inline-block; width:120px;">Postal Code</label>
-            <span>@Model.PostalCode</span>
+        <div class="profile-row">
+            <label class="profile-label">Postal Code</label>
+            <span class="profile-value">@Model.PostalCode</span>
         </div>
     </div>
+</div>
 
-<p style="color:red;">@ViewBag.Message</p>
+<p class="message-text">@ViewBag.Message</p>
